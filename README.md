@@ -1,20 +1,5 @@
 # color_detect
-/**
- * MultipleColorTracking
- * Select 4 colors to track them separately
- *
- * It uses the OpenCV for Processing library by Greg Borenstein
- * https://github.com/atduskgreg/opencv-processing
- *
- * @author: Jordi Tost
- * @updated: 06/10/2014
- *
- * University of Applied Sciences Potsdam, 2014
- *
- *
- * Instructions:
- * Press one numerical key [1-4] and click on one color to track it
- */
+
 
 import java.util.*;
 import gab.opencv.*;
@@ -101,4 +86,81 @@ void mousePressed() {
         int hue = int(map(hue(c), 0, 255, 0, 180));;
         blobGroup = new BlobGroup(this, c);
         println("color value: " + hue);
+}
+
+
+
+
+# opencv
+
+import gab.opencv.*;
+import processing.video.*;
+import java.awt.*;
+import processing.serial.*; // import the lib
+
+
+//int rangeLow = 20;
+//int rangeHigh = 35;
+int Colour = 35;
+
+Serial port;     // Create object from Serial class
+Capture video;
+OpenCV opencv;
+
+void setup() {
+  size(640, 480);
+  video = new Capture(this, 640/2, 480/2, "USB 2.0 Camera", 30);
+  //  video = new Capture(this, 640/2, 480/2);
+  opencv = new OpenCV(this, 640/2, 480/2);
+  opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
+
+  String portname = Serial.list()[7]; // <-- this index may vary!
+  port = new Serial(this, portname, 9600); // new serial port item
+
+  video.start();
+}
+
+
+//void mousePressed() {
+// 
+//  color c = get(mouseX, mouseY);
+//  println("r: " + red(c) + " g: " + green(c) + " b: " + blue(c));
+//   
+//  int hue = int(map(hue(c), 0, 255, 0, 180));
+//  println("hue to detect: " + hue);
+//  
+//  rangeLow = hue - 5;
+//  rangeHigh = hue + 5;
+//}
+
+void draw() {
+
+  scale(2);
+  opencv.loadImage(video);
+
+  image(video, 0, 0 );
+
+  noFill();
+  stroke(0, 255, 0);
+  strokeWeight(3);
+  Rectangle[] faces = opencv.detect();
+  println(faces.length);
+
+  for (int i = 0; i < faces.length; i++) {
+    println(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+    rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+
+    //if(faces[i].y > 100 || Colour > 33){ 
+    if (faces[i].y > 100) {
+      println("love");
+      port.write('1');
+    } else {
+      println("nolove"); 
+     port.write('0');
+    }
+  }
+}
+
+void captureEvent(Capture c) {
+  c.read();
 }
