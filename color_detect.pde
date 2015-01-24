@@ -1,18 +1,24 @@
 /**
- * color_detect by @christinrothe
+ * color_detect by
+ * @christinrothe
+ * @fabiantheblind
+ *
+ * for Input Output (Eingabe Ausgabe)
+ * Fundamentals of process-oriented design
+ * https://incom.org/workspace/5478
  *
  * based on ctrlr by
  * @Flave
  * @kernfruit
  * @killinglyfunny
- * for Homo Effectus https://incom.org/projekt/5197
  *
+ * for Homo Effectus https://incom.org/projekt/5197
  * University of Applied Sciences Potsdam (Germany)
  * Project: DIY (Multi) Touch (less) Human Computer Interaction
  *
  *
- * MultipleColorTracking
- * Select 4 colors to track them separately
+ * ColorTracking
+ * Select a colors to track
  *
  * It uses the OpenCV for Processing library by Greg Borenstein
  * https://github.com/atduskgreg/opencv-processing
@@ -24,7 +30,7 @@
  *
  *
  * Instructions:
- * Press one numerical key [1-4] and click on one color to track it
+ * Click on one color to track it
  */
 
 import java.util.*;
