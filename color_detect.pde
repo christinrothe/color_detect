@@ -36,25 +36,33 @@
 import java.util.*;
 import gab.opencv.*;
 import processing.video.*;
-import java.awt.Rectangle;
-
-import netP5.*;
+import java.awt.*;
+import processing.serial.*; // import the lib
 
 Capture video;
 OpenCV opencv;
 PImage src;
+Serial port;     // Create object from Serial class
 
 
+//int rangeLow = 20;
+//int rangeHigh = 35;
+int Colour = 35;
 
 // List of my blob groups
 BlobGroup blobGroup;
 boolean color_visible = false;
-
+boolean face_visible = false;
 void setup() {
-  video = new Capture(this, 640, 480);
-  opencv = new OpenCV(this, video.width, video.height);
+  video = new Capture(this, 640/2, 480/2, "USB 2.0 Camera", 30);
+  // video = new Capture(this, 640/2, 480/2);
+  opencv = new OpenCV(this, 640/2, 480/2);
+  opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);
 
   size(opencv.width + opencv.width/4 + 30, opencv.height, P2D);
+  String portname = Serial.list()[7]; // <-- this index may vary!
+  port = new Serial(this, portname, 9600); // new serial port item
+
   video.start();
 }
 
@@ -65,6 +73,7 @@ void draw() {
   if (video.available()) {
     video.read();
   }
+  scale(2);
 
   // <2> Load the new frame of our movie in to OpenCV
   opencv.loadImage(video);
@@ -94,6 +103,21 @@ void draw() {
     }
   }
 
+  noFill();
+  stroke(0, 255, 0);
+  strokeWeight(3);
+  Rectangle[] faces = opencv.detect();
+  println(faces.length);
+
+  if (faces.length > 0) {
+    rect(faces[0].x, faces[0].y, faces[0].width, faces[0].height);
+    if (faces[0].y > 100) {
+      face_visible = true;
+    } else {
+      face_visible = false;
+    }
+  }
+
 
   // Print text if new color expected
   textSize(20);
@@ -102,9 +126,17 @@ void draw() {
 
   text("click the mouse to change the color ", 10, 25);
 
-  if (color_visible == true) {
-    println("Yeah found the color");
+  if (color_visible == true || face_visible == true) {
+    println("love");
+    port.write('1');
+  } else {
+    println("no love");
+    port.write('0');
   }
+}
+
+void captureEvent(Capture c) {
+  c.read();
 }
 
 //////////////////////
