@@ -1,10 +1,10 @@
 # color_detect
 
 
-import java.util.*;
-import gab.opencv.*;
-import processing.video.*;
-import java.awt.Rectangle;
+import java.util.*;//
+import gab.opencv.*;//
+import processing.video.*;//
+import java.awt.Rectangle;//
 
 //import netP5.*;
 
