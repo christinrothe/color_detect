@@ -54,12 +54,12 @@ BlobGroup blobGroup;
 boolean color_visible = false;
 boolean face_visible = false;
 void setup() {
-  video = new Capture(this, 640/2, 480/2, "USB 2.0 Camera", 30);
-  // video = new Capture(this, 640/2, 480/2);
+  video = new Capture(this, 640/2, 480/2, "USB 2.0 Camera");
+//  video = new Capture(this, 640/2, 480/2);
   opencv = new OpenCV(this, 640/2, 480/2);
   opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);
 
-  size(opencv.width + opencv.width/4 + 30, opencv.height, P2D);
+  size(640, 480, P2D);
   String portname = Serial.list()[7]; // <-- this index may vary!
   port = new Serial(this, portname, 9600); // new serial port item
 
@@ -73,7 +73,7 @@ void draw() {
   if (video.available()) {
     video.read();
   }
-  scale(2);
+//  scale(2);
 
   // <2> Load the new frame of our movie in to OpenCV
   opencv.loadImage(video);
@@ -93,7 +93,7 @@ void draw() {
     noStroke();
     fill(blobGroup.colr);
     rect(src.width, 0, 30, src.height/4);
-    image(blobGroup.output, width - src.width/4, 0, src.width/4, src.height/4);
+//    image(blobGroup.output, width - src.width/4, 0, src.width/4, src.height/4);
     if (blobGroup.visible) {
       color_visible = true;
       // draw positions
@@ -107,7 +107,6 @@ void draw() {
   stroke(0, 255, 0);
   strokeWeight(3);
   Rectangle[] faces = opencv.detect();
-  println(faces.length);
 
   if (faces.length > 0) {
     rect(faces[0].x, faces[0].y, faces[0].width, faces[0].height);
@@ -116,23 +115,29 @@ void draw() {
     } else {
       face_visible = false;
     }
+  }else{
+      face_visible = false;
   }
 
 
   // Print text if new color expected
-  textSize(20);
-  stroke(255);
-  fill(255);
+//  textSize(20);
+//  stroke(255);
+//  fill(255);
 
-  text("click the mouse to change the color ", 10, 25);
+//  text("click the mouse to change the color ", 10, 25);
 
-  if (color_visible == true || face_visible == true) {
-    println("love");
+  if ((color_visible == true) || (face_visible == true)) {
+//    println("love");
     port.write('1');
   } else {
-    println("no love");
+//    println("no love");
     port.write('0');
   }
+  
+  println("Face visible: " + face_visible);
+  println("Faces length: " + faces.length);
+  println("Color visible: " + color_visible);
 }
 
 void captureEvent(Capture c) {
@@ -152,4 +157,3 @@ void mousePressed() {
   blobGroup = new BlobGroup(this, c);
   println("color value: " + hue);
 }
-
