@@ -1,74 +1,48 @@
+computer love
+=============
 
-# opencv
+An Processing sketch for:  
+[Input Output (Eingabe Ausgabe)](https://incom.org/workspace/5478)  
+Fundamentals of process-oriented design  
 
-import gab.opencv.*; 
-import processing.video.*; 
-import java.awt.*; 
-import processing.serial.*; // import the lib 
+@christinrothe  
+@fabiantheblind  
+@updated: 29/01/2015  
 
+based on Homo-Effectus [https://github.com/FH-Potsdam/Homo-Effectus](https://github.com/FH-Potsdam/Homo-Effectus) by  
+@Flave  
+@kernfruit  
+@killinglyfunny  
+[https://incom.org/projekt/5197](https://incom.org/projekt/5197)  
+University of Applied Sciences Potsdam (Germany)  
+Project: DIY (Multi) Touch (less) Human Computer Interaction  
 
-//int rangeLow = 20;
-//int rangeHigh = 35;
-int Colour = 35;
+###Facetracking   
+- Just put your face into the frame  
 
-Serial port;     // Create object from Serial class
-Capture video;
-OpenCV opencv;
+###ColorTracking   
+- Select a colors to track by clicking into the source image  
 
-void setup() {
-  size(640, 480);
-  video = new Capture(this, 640/2, 480/2, "USB 2.0 Camera", 30);
-  //  video = new Capture(this, 640/2, 480/2);
-  opencv = new OpenCV(this, 640/2, 480/2);
-  opencv.loadCascade(OpenCV.CASCADE_FRONTALFACE);  
-
-  String portname = Serial.list()[7]; // <-- this index may vary!
-  port = new Serial(this, portname, 9600); // new serial port item
-
-  video.start();
-}
+###Options   
+- press 'o' or 'O' to disable enable src drawing  
 
 
-//void mousePressed() {
-// 
-//  color c = get(mouseX, mouseY);
-//  println("r: " + red(c) + " g: " + green(c) + " b: " + blue(c));
-//   
-//  int hue = int(map(hue(c), 0, 255, 0, 180));
-//  println("hue to detect: " + hue);
-//  
-//  rangeLow = hue - 5;
-//  rangeHigh = hue + 5;
-//}
+It uses the OpenCV for Processing library by Greg Borenstein  
+[https://github.com/atduskgreg/opencv-processing](https://github.com/atduskgreg/opencv-processing)  
 
-void draw() {
+based on examples by  
+@author: Jordi Tost  
+@updated: 06/10/2014  
 
-  scale(2);
-  opencv.loadImage(video);
+University of Applied Sciences Potsdam, 2014  
 
-  image(video, 0, 0 );
+##License
 
-  noFill();
-  stroke(0, 255, 0);
-  strokeWeight(3);
-  Rectangle[] faces = opencv.detect();
-  println(faces.length);
+Copyright (c)  2015 Christin Rothe & Fabian "fabiantheblind" Morón Zirfas  
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software  without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to  permit persons to whom the Software is furnished to do so, subject to the following conditions:  
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A  PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  
 
-  for (int i = 0; i < faces.length; i++) {
-    println(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
-    rect(faces[i].x, faces[i].y, faces[i].width, faces[i].height);
+see also [http://www.opensource.org/licenses/mit-license.php](http://www.opensource.org/licenses/mit-license.php)
 
-    //if(faces[i].y > 100 || Colour > 33){ 
-    if (faces[i].y > 100) {
-      println("love");
-      port.write('1');
-    } else {
-      println("nolove"); 
-     port.write('0');
-    }
-  }
-}
 
-void captureEvent(Capture c) {
-  c.read();
-}
