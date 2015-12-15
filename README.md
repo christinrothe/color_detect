@@ -1,3 +1,29 @@
+#Tt155
+
+###Task
+Choose a binary state and visualize it with a flip dot project.
+
+###My binary state
+interest // no interest 
+
+###implementation
+The most important form of non-verbal communication is the eye contact. It shows us the intention of our dialog partner and our fellow men. Getting eye contact shows us the interest of someone, which doesn't mean, that this always is a good thing for us (eg. flirting // mobbing).Eyes give us the feeling of vividness and are a catalyst of emotions.
+
+The Tt155 has its own taste and sellects, who is interesting and who's not.
+
+How does it feel for the audience, if they get the attention from the Tt155?
+Is it disapointing if it doesn't show a reaction?
+Can something, that unpersonal like a machine, can hurt someone personally?
+
+###images
+![ ](https://cloud.githubusercontent.com/assets/9571378/11808610/b88a712c-a321-11e5-9f2a-c285d2d30e7c.jpg)
+![ ](https://cloud.githubusercontent.com/assets/9571378/11808481/161b8034-a321-11e5-891f-dc81debb0ea5.jpg)
+![ ](https://cloud.githubusercontent.com/assets/9571378/11808394/a20a490a-a320-11e5-95e7-26955d175f71.jpg)
+
+###video
+https://vimeo.com/143515553
+
+
 computer love
 =============
 
