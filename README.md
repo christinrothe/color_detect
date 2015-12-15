@@ -12,7 +12,9 @@ The most important form of non-verbal communication is the eye contact. It shows
 The Tt155 has its own taste and sellects, who is interesting and who's not.
 
 How does it feel for the audience, if they get the attention from the Tt155?
+
 Is it disapointing if it doesn't show a reaction?
+
 Can something, that unpersonal like a machine, can hurt someone personally?
 
 ###images
