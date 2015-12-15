@@ -1,7 +1,7 @@
 #Tt155
 
 ###Task
-Choose a binary state and visualize it with a flip dot project.
+Choose a binary state and visualize it with a flip dot.
 
 ###My binary state
 interest // no interest 
